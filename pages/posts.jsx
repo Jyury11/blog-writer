@@ -3,6 +3,7 @@ import React from 'react'
 import Navbar from '../components/Presentation/Navbar'
 import PostTable from '../components/Presentation/PostTable'
 import AddPostModal from '../components/Presentation/AddPostModal'
+import GetDB from '../components/Services/GetDB'
 import Head from 'next/head'
 
 export default class Posts extends React.Component {

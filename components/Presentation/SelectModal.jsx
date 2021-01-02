@@ -1,7 +1,10 @@
-import React from "react";
+import React from "react"
+import FetchClient from "../Services/FetchClient"
 import PasswordForm from "./PasswordForm"
 
-let selected = "";
+let selected = {
+    'name': ""
+};
 let password = "";
 
 export default function SelectModal(props) {
@@ -64,7 +67,7 @@ export default function SelectModal(props) {
                             className="bg-green-500 text-white active:bg-green-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1"
                             type="button"
                             style={{ transition: "all .15s ease" }}
-                            onClick={() => add(setShowModal)}
+                            onClick={() => add(setShowModal, props)}
                         >
                             追加
                         </button>
@@ -88,7 +91,7 @@ function selectChange(event) {
     selected = event.target.value
 }
 
-function add(func) {
+function add(func, props) {
     if(password !== "coderdojo")
     {
         alert("パスワードが違います。")
@@ -99,7 +102,24 @@ function add(func) {
     }
     else
     {
-        console.log(selected)
+        let setVal = {}
+        props.posts.map(post => {
+            if (post.name === selected) {
+                setVal = post
+            }
+        })
+
+        const body = {
+            'collection': 'writer',
+            'id': setVal.id,
+            'params': {
+                'name': setVal.name,
+                'priority': setVal.priority
+            }
+        }
+        console.log(setVal)
+        console.log(body)
+        FetchClient(`/api/db`, 'Post', body)
         func(false)
     }
 }

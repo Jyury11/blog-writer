@@ -6,6 +6,7 @@ export default (req, res) => {
     switch (req.method) {
         case 'POST': {
             res.statusCode = 200
+            console.log(req.body)
             if(req.body.id === null){
                 new Promise((resolve, reject) => { AddDoc(resolve, reject, req.body.collection, req.body.params) })
                 res.json({ message: 'Add Success' })
@@ -18,7 +19,7 @@ export default (req, res) => {
             break;
         }
         case 'DELETE': {
-            Promise((resolve, reject) => { DeleteDoc(resolve, reject, req.query.collection, req.query.id) })
+            new Promise((resolve, reject) => { DeleteDoc(resolve, reject, req.query.collection, req.query.id) })
             res.statusCode = 200
             res.json({ message: 'Delete Success' })
             break;

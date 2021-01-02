@@ -84,17 +84,14 @@ function del(func) {
     }
     else
     {
-        const body = {
-            collection: 'writer',
-            id: id
-        }
-        FetchClient('/api/db', 'Delete', body)
+        const body = null
+        FetchClient(`/api/db?collection=writer&id=${id}`, 'Delete', body)
         func(false)
     }
 }
 
 function open(func, props) {
     password = "";
-    let id = props.id;
+    id = props.id;
     func(true)
 }
