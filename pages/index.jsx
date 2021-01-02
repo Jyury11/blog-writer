@@ -41,7 +41,7 @@ function Home({ posts, writers }) {
     );
 }
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
     const writers = JSON.stringify(await new Promise((resolve, reject) => { GetDB(resolve, reject, 'writer') }))
     const posts = JSON.stringify(await new Promise((resolve, reject) => { GetDB(resolve, reject, 'posts') }))
     return {

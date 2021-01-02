@@ -20,7 +20,7 @@ function Posts({ posts }) {
     )
 }
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
     const posts = JSON.stringify(await new Promise((resolve, reject) => { GetDB(resolve, reject, 'posts') }))
     return {
         props: {
