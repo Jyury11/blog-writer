@@ -6,6 +6,7 @@ import GetDB from '../components/Services/GetDB'
 import Head from 'next/head'
 
 function Posts({ posts }) {
+    posts = JSON.parse(posts)
     return (
         <div>
             <Head>
@@ -19,9 +20,13 @@ function Posts({ posts }) {
     )
 }
 
-Posts.getInitialProps = async () => {
-    const posts = await new Promise((resolve, reject) => { GetDB(resolve, reject, 'posts') })
-    return {posts: posts}
+export async function getServerSideProps() {
+    const posts = JSON.stringify(await new Promise((resolve, reject) => { GetDB(resolve, reject, 'posts') }))
+    return {
+        props: {
+          posts
+        },
+    }
 }
 
 export default Posts

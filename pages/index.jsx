@@ -8,6 +8,8 @@ import GetDB from '../components/Services/GetDB'
 import React from 'react'
 
 function Home({ posts, writers }) {
+    posts = JSON.parse(posts)
+    writers = JSON.parse(writers)
     return (
       <div>
         <Head>
@@ -39,12 +41,14 @@ function Home({ posts, writers }) {
     );
 }
 
-Home.getInitialProps = async () => {
-    const writers = await new Promise((resolve, reject) => { GetDB(resolve, reject, 'writer') })
-    const posts = await new Promise((resolve, reject) => { GetDB(resolve, reject, 'posts') })
+export async function getServerSideProps() {
+    const writers = JSON.stringify(await new Promise((resolve, reject) => { GetDB(resolve, reject, 'writer') }))
+    const posts = JSON.stringify(await new Promise((resolve, reject) => { GetDB(resolve, reject, 'posts') }))
     return {
-      posts: posts,
-      writers: writers
+        props: {
+          posts,
+          writers
+        },
     }
 }
 
