@@ -45,6 +45,7 @@ export default function SelectModal(props) {
                         {/*body*/}
                         <div className="relative p-2 flex-auto lg:m-6">
                         <select defaultValue={selected} onChange={selectChange} className="flex justify-center items-center border-b border-solid border-gray-300 text-black mx-10 my-2 px-20 py-2 lg:m-10">
+                            <option value=""> </option>
                             <React.Fragment>
                             {props.posts.map(post =>
                                 <option value={post.name}>{post.name}</option>
@@ -123,6 +124,7 @@ function add(func, props) {
 }
 
 function open(func) {
-    password = "";
+    password = ""
+    selected = ""
     func(true)
 }
