@@ -9,11 +9,11 @@ export default function DeletePostModal(props) {
   const [showModal, setShowModal] = React.useState(false);
   return (
     <>
-        <div className="flex justify-end m-10">
+        <div className="flex justify-end m-1">
             <button
                 className="rounded-full bg-red-500 text-white text-xl hover:bg-red-600 font-bold uppercase px-5 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1"
                 type="button"
-                style={{ transition: "all .5s ease" }}
+                style={{ transition: "all .15s ease" }}
                 onClick={() => open(setShowModal, props)}
             >
                 -

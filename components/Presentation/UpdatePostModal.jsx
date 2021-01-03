@@ -11,11 +11,11 @@ export default function UpdatePostModal(props) {
   const priorityArr = [...Array(254).keys()].map(i => i++);
   return (
     <>
-        <div className="flex justify-end m-10">
+        <div className="flex justify-end m-1">
             <button
                 className="rounded-full bg-green-500 text-white text-xl hover:bg-green-600 font-bold uppercase px-5 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1"
                 type="button"
-                style={{ transition: "all .5s ease" }}
+                style={{ transition: "all .15s ease" }}
                 onClick={() => open(setShowModal, props)}
             >
                 +

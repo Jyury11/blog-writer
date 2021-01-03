@@ -10,9 +10,9 @@ export default function AddPostModal(props) {
   const priorityArr = [...Array(254).keys()].map(i => i++);
   return (
     <>
-        <div className="m-10 bottom-10 right-10 fixed">
+        <div className="m-5 bottom-5 right-5 lg:m-10 lg:bottom-10 lg:right-10 fixed">
             <button
-                className="rounded-full bg-pink-500 text-white text-xl hover:bg-pink-600 font-bold uppercase px-5 py-3 shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1"
+                className="rounded-full bg-gradient-to-br from-red-300 to-pink-500 active:from-pink-600 active:to-pink-600 text-white text-xl lg:text-3xl font-bold uppercase px-5 py-3 lg:px-10 lg:py-8 shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1"
                 type="button"
                 style={{ transition: "all .5s ease" }}
                 onClick={() => open(setShowModal)}
