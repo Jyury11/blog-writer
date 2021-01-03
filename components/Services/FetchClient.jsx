@@ -14,7 +14,8 @@ export default async function FetchCLient(url, method, strBody) {
     })
 
     if (res.status === 200) {
-        document.location.reload()
+        console.log(res)
+        // document.location.reload()
     }
     else
     {
