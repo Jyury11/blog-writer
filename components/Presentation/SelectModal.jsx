@@ -23,14 +23,14 @@ export default function SelectModal(props) {
             {showModal ? (
                 <>
                 <div
-                    className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
+                    className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none m-1"
                 >
-                    <div className="relative w-auto my-6 mx-auto max-w-3xl">
+                    <div className="relative w-full lg:w-auto my-6 mx-auto max-w-3xl">
                     {/*content*/}
                     <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                         {/*header*/}
                         <div className="flex items-start justify-between p-5 border-b border-solid border-gray-300 rounded-t">
-                        <h3 className="text-3xl font-semibold">
+                        <h3 className="text-xl md:text-3xl font-semibold">
                             参加者を選択してください。
                         </h3>
                         <button
@@ -45,10 +45,10 @@ export default function SelectModal(props) {
                         {/*body*/}
                         <div className="relative p-2 flex-auto lg:m-6">
                         <select defaultValue={selected} onChange={selectChange} className="flex justify-center items-center border-b border-solid border-gray-300 text-black mx-10 my-2 px-20 py-2 lg:m-10">
-                            <option value=""> </option>
+                            <option key="none" value=""> </option>
                             <React.Fragment>
                             {props.posts.map(post =>
-                                <option value={post.name}>{post.name}</option>
+                                <option key={post.name} value={post.name}>{post.name}</option>
                             )}
                             </React.Fragment>
                         </select>

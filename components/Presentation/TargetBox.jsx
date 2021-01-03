@@ -11,7 +11,7 @@ export default function WriterList(props) {
     )
     return (
         <div>
-            <div className="flex rounded justify-between items-center bg-gradient-to-br from-green-500 to-blue-900 text-white m-10 text-2xl">
+            <div className="flex rounded justify-between items-center bg-gradient-to-br from-green-500 to-blue-900 text-white m-2 lg:m-10 text-2xl">
                 <h2 className="p-5">
                     {props.title}
                 </h2>

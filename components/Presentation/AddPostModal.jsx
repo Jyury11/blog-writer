@@ -23,7 +23,7 @@ export default function AddPostModal(props) {
             {showModal ? (
                 <>
                 <div
-                    className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
+                    className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none m-1"
                 >
                     <div className="relative w-full lg:w-auto my-6 mx-auto max-w-3xl">
                     {/*content*/}
@@ -44,16 +44,18 @@ export default function AddPostModal(props) {
                         </div>
                         {/*body*/}
                         <div className="relative p-2 flex-auto lg:m-6">
-                            <label  className="flex justify-left items-center border-b border-solid border-gray-300 text-black m-2 lg:px-6 py-2 lg:m-10">
-                                名前：
-                                <input defaultValue={name} onChange={nameChange} type="text" />
+                            <label  className="flex justify-left items-center border-b border-solid border-gray-300 text-black mx-4 lg:px-6 py-2 lg:m-10">
+                                <div　className="mx-1 lg:w-auto">
+                                    名前：
+                                </div>
+                                <input defaultValue={name} onChange={nameChange} type="text" className="w-2/3 lg:w-auto"/>
                             </label>
                             <label className="flex justify-left items-center border-b border-solid border-gray-300 text-black m-2 lg:px-6 py-2 lg:m-10">
                                 優先度：
                                 <select defaultValue={priority} onChange={priorityChange} >
                                 <React.Fragment>
                                 {priorityArr.map(priority =>
-                                    <option value={priority}>{priority}</option>
+                                    <option key={priority} value={priority}>{priority}</option>
                                 )}
                                 </React.Fragment>
                                 </select>
