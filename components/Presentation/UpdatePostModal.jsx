@@ -1,5 +1,6 @@
 import React from "react";
 import PasswordForm from "./PasswordForm"
+import FetchClient from "../Services/FetchClient"
 
 let password = "";
 let name = "";
@@ -13,7 +14,7 @@ export default function UpdatePostModal(props) {
     <>
         <div className="flex justify-end m-1">
             <button
-                className="rounded-full bg-green-500 text-white text-xl hover:bg-green-600 font-bold uppercase px-5 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1"
+                className="rounded bg-gradient-to-br from-blue-300 to-green-500 hover:from-green-600 hover:to-green-600 text-white text-xl font-bold uppercase px-5 py-1 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1"
                 type="button"
                 style={{ transition: "all .15s ease" }}
                 onClick={() => open(setShowModal, props)}
@@ -25,7 +26,7 @@ export default function UpdatePostModal(props) {
                 <div
                     className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
                 >
-                    <div className="relative w-auto my-6 mx-auto max-w-3xl">
+                    <div className="relative w-full lg:w-auto my-6 mx-auto max-w-3xl">
                     {/*content*/}
                     <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                         {/*header*/}
@@ -43,22 +44,22 @@ export default function UpdatePostModal(props) {
                         </button>
                         </div>
                         {/*body*/}
-                        <div className="relative p-6 flex-auto">
-                        <label  className="flex justify-left items-center border-b border-solid border-gray-300 text-black m-10 px-6 py-2">
-                            名前：
-                            <input defaultValue={name} onChange={nameChange} type="text" />
-                        </label>
-                        <label className="flex justify-left items-center border-b border-solid border-gray-300 text-black m-10 px-6 py-2">
-                            優先度：
-                            <select defaultValue={priority} onChange={priorityChange} >
-                            <React.Fragment>
-                            {priorityArr.map(priority =>
-                                <option value={priority}>{priority}</option>
-                            )}
-                            </React.Fragment>
-                            </select>
-                        </label>
-                        <PasswordForm apiRoot={props.apiRoot} func={handleChange} />
+                        <div className="relative p-2 flex-auto lg:m-6">
+                            <label  className="flex justify-left items-center border-b border-solid border-gray-300 text-black m-2 lg:px-6 py-2 lg:m-10">
+                                名前：
+                                <input defaultValue={name} onChange={nameChange} type="text" />
+                            </label>
+                            <label className="flex justify-left items-center border-b border-solid border-gray-300 text-black m-2 lg:px-6 py-2 lg:m-10">
+                                優先度：
+                                <select defaultValue={priority} onChange={priorityChange} >
+                                <React.Fragment>
+                                {priorityArr.map(priority =>
+                                    <option value={priority}>{priority}</option>
+                                )}
+                                </React.Fragment>
+                                </select>
+                            </label>
+                            <PasswordForm func={handleChange} />
                         </div>
                         {/*footer*/}
                         <div className="flex items-center justify-end p-6 border-t border-solid border-gray-300 rounded-b">
@@ -112,6 +113,15 @@ function del(func) {
     }
     else
     {
+        const body = {
+            'collection': 'posts',
+            'id': id,
+            'params': {
+                'name': name,
+                'priority': priority
+            }
+        }
+        FetchClient(`/api/db`, 'Post', body)
         func(false)
     }
 }

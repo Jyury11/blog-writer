@@ -20,7 +20,7 @@ function Home({ posts, writers }) {
         <Navbar />
         <WriterList writers={writers} title="本日の参加者" />
         <TargetBox writers={writers} title="現在の達筆者"  />
-        <SelectModal posts={posts} apiRoot="./api/addWriter" />
+        <SelectModal posts={posts} />
 
         <div  className={styles.container}>
           <main className={styles.main}>

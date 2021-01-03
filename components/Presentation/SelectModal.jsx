@@ -11,7 +11,7 @@ export default function SelectModal(props) {
   const [showModal, setShowModal] = React.useState(false);
   return (
     <>
-        <div className="m-5 bottom-5 right-5 lg:m-10 lg:bottom-10 lg:right-10 fixed">
+        <div className="m-5 bottom-5 right-5 lg:m-10 lg:bottom-10 lg:right-10 fixed text-2xl">
             <button
                 className="rounded-full bg-gradient-to-br from-red-300 to-pink-500 active:from-pink-600 active:to-pink-600 text-white text-xl lg:text-3xl font-bold uppercase px-5 py-3 lg:px-10 lg:py-8 shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1"
                 type="button"
@@ -43,15 +43,15 @@ export default function SelectModal(props) {
                         </button>
                         </div>
                         {/*body*/}
-                        <div className="relative p-6 flex-auto">
-                        <select defaultValue={selected} onChange={selectChange} className="flex justify-center items-center border-b border-solid border-gray-300 text-black m-10 px-6 py-2">
+                        <div className="relative p-2 flex-auto lg:m-6">
+                        <select defaultValue={selected} onChange={selectChange} className="flex justify-center items-center border-b border-solid border-gray-300 text-black mx-10 my-2 px-20 py-2 lg:m-10">
                             <React.Fragment>
                             {props.posts.map(post =>
                                 <option value={post.name}>{post.name}</option>
                             )}
                             </React.Fragment>
                         </select>
-                        <PasswordForm apiRoot={props.apiRoot} func={handleChange} />
+                        <PasswordForm func={handleChange} />
                         </div>
                         {/*footer*/}
                         <div className="flex items-center justify-end p-6 border-t border-solid border-gray-300 rounded-b">

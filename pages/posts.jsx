@@ -14,8 +14,8 @@ function Posts({ posts }) {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <Navbar />
-            <PostTable posts={posts} title="CoderDojooメンバー" />
-            <AddPostModal apiRoot="./api/addPost" />
+            <PostTable posts={posts} title="CoderDojoメンバー" />
+            <AddPostModal />
         </div>
     )
 }

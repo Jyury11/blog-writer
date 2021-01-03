@@ -25,10 +25,10 @@ export default function WriterList(props) {
                             <td className="m-10 p-2">{post.name}</td>
                             <td className="m-10 p-2">{post.priority}</td>
                             <td>
-                                <UpdatePostModal name={post.name} priority={post.priority} apiRoot="./api/updatePost" />
+                                <UpdatePostModal name={post.name} priority={post.priority} id={post.id} />
                             </td>
                             <td>
-                                <DeletePostModal apiRoot="./api/delPost" id={post.id}/>
+                                <DeletePostModal id={post.id}/>
                             </td>
                         </tr>
                     )}

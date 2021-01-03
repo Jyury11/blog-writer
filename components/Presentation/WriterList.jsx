@@ -23,14 +23,15 @@ export default function WriterList(props) {
             {props.writers.map(writer =>
                 <li key={writer.id} className="text-center border-b border-solid border-gray-300 px-4">
                     <div className="flex justify-center items-center">
-                        <h2 className="mx-10">
+                        <h2 className="mx-10 my-5">
                             {writer.name}
                         </h2>
-                        {showDel ? (
-                        <>
-                            <DeleteWriterModal delWriters={props.delWriters} id={writer.id} />
-                        </>
-                        ) : null}
+
+                            {showDel ? (
+                            <>
+                                <DeleteWriterModal id={writer.id} />
+                            </>
+                            ) : null}
                     </div>
                 </li>
             )}

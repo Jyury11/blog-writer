@@ -11,7 +11,7 @@ export default function DeletePostModal(props) {
     <>
         <div className="flex justify-end m-1">
             <button
-                className="rounded-full bg-red-500 text-white text-xl hover:bg-red-600 font-bold uppercase px-5 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1"
+                className="rounded bg-red-500 text-white text-xl hover:bg-red-600 font-bold uppercase px-5 py-1 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1"
                 type="button"
                 style={{ transition: "all .15s ease" }}
                 onClick={() => open(setShowModal, props)}
@@ -42,7 +42,7 @@ export default function DeletePostModal(props) {
                         </div>
                         {/*body*/}
                         <div className="relative p-6 flex-auto">
-                        <PasswordForm apiRoot={props.apiRoot} func={handleChange} />
+                        <PasswordForm func={handleChange} />
                         </div>
                         {/*footer*/}
                         <div className="flex items-center justify-end p-6 border-t border-solid border-gray-300 rounded-b">
