@@ -117,8 +117,6 @@ function add(func, props) {
                 'priority': setVal.priority
             }
         }
-        console.log(setVal)
-        console.log(body)
         FetchClient(`/api/db`, 'Post', body)
         func(false)
     }
