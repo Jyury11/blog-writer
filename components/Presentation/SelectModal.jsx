@@ -115,7 +115,7 @@ function add(func, props) {
             'id': setVal.id,
             'params': {
                 'name': setVal.name,
-                'priority': setVal.priority
+                'priority': Number(setVal.priority)
             }
         }
         FetchClient(`/api/db`, 'Post', body)
