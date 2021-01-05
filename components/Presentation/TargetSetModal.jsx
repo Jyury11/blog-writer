@@ -1,24 +1,21 @@
 import React from "react";
+import FetchClient from "../Services/FetchClient";
 import PasswordForm from "./PasswordForm"
-import FetchClient from "../Services/FetchClient"
 
 let password = "";
-let name = "";
-let priority = 0;
 
-export default function AddPostModal(props) {
+export default function DeleteWriterModal(props) {
   const [showModal, setShowModal] = React.useState(false);
-  const priorityArr = [...Array(254).keys()].map(i => i++);
   return (
     <>
-        <div className="m-5 bottom-5 right-5 lg:m-10 lg:bottom-10 lg:right-10 fixed text-2xl">
+        <div className="m-1 text-black">
             <button
-                className="rounded-full bg-gradient-to-br from-red-300 to-pink-500 active:from-pink-600 active:to-pink-600 text-white text-xl lg:text-3xl font-bold uppercase px-5 py-3 lg:px-10 lg:py-8 shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1"
+                className="rounded bg-gradient-to-br from-gray-300 to-gray-500 hover:to-gray-700 hover:from-gray-700 py-1 px-3 mx-2"
                 type="button"
-                style={{ transition: "all .5s ease" }}
+                style={{ transition: "all .15s ease" }}
                 onClick={() => open(setShowModal)}
             >
-                +
+                Select
             </button>
             {showModal ? (
                 <>
@@ -31,7 +28,7 @@ export default function AddPostModal(props) {
                         {/*header*/}
                         <div className="flex items-start justify-between p-5 border-b border-solid border-gray-300 rounded-t">
                         <h3 className="text-3xl font-semibold">
-                            追加しますか？
+                            執筆者を選出しますか？
                         </h3>
                         <button
                             className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
@@ -43,23 +40,7 @@ export default function AddPostModal(props) {
                         </button>
                         </div>
                         {/*body*/}
-                        <div className="relative p-2 flex-auto lg:m-6">
-                            <label  className="flex justify-left items-center border-b border-solid border-gray-300 text-black mx-4 lg:px-6 py-2 lg:m-10">
-                                <div　className="mx-1 lg:w-auto">
-                                    名前：
-                                </div>
-                                <input defaultValue={name} onChange={nameChange} type="text" className="w-2/3 lg:w-auto"/>
-                            </label>
-                            <label className="flex justify-left items-center border-b border-solid border-gray-300 text-black m-2 lg:px-6 py-2 lg:m-10">
-                                優先度：
-                                <select defaultValue={priority} onChange={priorityChange} >
-                                <React.Fragment>
-                                {priorityArr.map(priority =>
-                                    <option key={priority} value={priority}>{priority}</option>
-                                )}
-                                </React.Fragment>
-                                </select>
-                            </label>
+                        <div className="relative p-3 flex-auto lg:p-6 ">
                             <PasswordForm func={handleChange} />
                         </div>
                         {/*footer*/}
@@ -76,9 +57,9 @@ export default function AddPostModal(props) {
                             className="bg-green-500 text-white active:bg-green-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1"
                             type="button"
                             style={{ transition: "all .15s ease" }}
-                            onClick={() => del(setShowModal)}
+                            onClick={() => Set(setShowModal, props)}
                         >
-                            追加
+                            選出
                         </button>
                         </div>
                     </div>
@@ -96,29 +77,19 @@ function handleChange(event) {
     password = event.target.value
 }
 
-function nameChange(event) {
-    name = event.target.value
-}
-
-function priorityChange(event) {
-    priority = event.target.value
-}
-
-function del(func) {
-    if(password !== "admin") {
+async function Set(func, props) {
+    if(password !== "coderdojo") {
         alert("パスワードが違います。")
-    }
-    else if(name === "")
-    {
-        alert("名前が不正です。")
     }
     else
     {
         const body = {
-            'collection': 'posts',
+            'collection': 'target',
+            'id': 'todayWriter',
             'params': {
-                'name': name,
-                'priority': Number(priority)
+                'name': props.target.name,
+                'writersId': props.target.id,
+                'priority': Number(props.target.priority)
             }
         }
         FetchClient(`/api/db`, 'Post', body)
@@ -127,7 +98,6 @@ function del(func) {
 }
 
 function open(func) {
-    name = "";
-    priority = 0;
+    password = "";
     func(true)
 }

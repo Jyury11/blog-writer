@@ -8,9 +8,10 @@ import GetDB from '../components/Services/GetDB'
 import CheckWriters from '../components/Services/CheckWriters'
 import React from 'react'
 
-function Home({ posts, writers }) {
+function Home({ posts, writers, target }) {
     posts = JSON.parse(posts)
     writers = JSON.parse(writers)
+    target = JSON.parse(target)
     return (
       <div>
         <Head>
@@ -20,7 +21,7 @@ function Home({ posts, writers }) {
 
         <Navbar />
         <WriterList writers={writers} title="本日の参加者" />
-        <TargetBox writers={writers} title="現在の達筆者"  />
+        <TargetBox target={target}　writers={writers} title="現在の段階の執筆者"  />
         <SelectModal posts={posts} />
         <Footer />
       </div>
@@ -28,12 +29,14 @@ function Home({ posts, writers }) {
 }
 
 export async function getServerSideProps() {
-    const writers = JSON.stringify(await new Promise((resolve, reject) => { CheckWriters(resolve, reject, 'writer', 'posts') }))
+    const writers = JSON.stringify(await new Promise((resolve, reject) => { CheckWriters(resolve, reject, 'writer', 'posts', 'target') }))
     const posts = JSON.stringify(await new Promise((resolve, reject) => { GetDB(resolve, reject, 'posts') }))
+    const target = JSON.stringify(await new Promise((resolve, reject) => { GetDB(resolve, reject, 'target') }))
     return {
         props: {
           posts,
-          writers
+          writers,
+          target
         },
     }
 }

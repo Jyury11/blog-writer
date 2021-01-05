@@ -120,7 +120,7 @@ function del(func) {
             'id': id,
             'params': {
                 'name': name,
-                'priority': priority
+                'priority': Number(priority)
             }
         }
         FetchClient(`/api/db`, 'Post', body)
