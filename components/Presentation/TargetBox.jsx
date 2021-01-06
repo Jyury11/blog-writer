@@ -1,7 +1,8 @@
 import TargetSetModal from './TargetSetModal'
 
 export default function WriterList(props) {
-    const targetPersons = props.writers.sort((a,b) =>{
+    const writers = JSON.parse(JSON.stringify(props.writers))
+    const targetPersons = writers.sort((a,b) =>{
             if (a.priority > b.priority) {
                 return -1;
             }

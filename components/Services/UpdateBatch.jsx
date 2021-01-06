@@ -1,6 +1,7 @@
 import { db } from '../../lib/db'
 
-export default function UpdateBatch(collection, id, batch) {
+export default function UpdateBatch(collection, id) {
+    let batch = db.batch()
     db.collection(collection)
     .get()
     .then(snapshot => {
@@ -11,5 +12,9 @@ export default function UpdateBatch(collection, id, batch) {
             }
             batch.update(doc.ref, { priority: setPriority})
         })
+        batch.commit()
+    })
+    .catch(error => {
+        console.log(error)
     })
 }

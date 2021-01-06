@@ -1,11 +1,12 @@
 import { db } from '../../lib/db'
 import UpdateBatch from './UpdateBatch'
+import UpdateTarget from './UpdateTarget'
 
 export default function CheckWriters(resolve, reject, getCollection, updateCollection, targetCollection) {
 
     db.collection(getCollection)
     .get()
-    .then(snapshot => {
+    .then(async snapshot => {
         let data = []
         snapshot.forEach((doc) => {
             data.push(
@@ -21,25 +22,13 @@ export default function CheckWriters(resolve, reject, getCollection, updateColle
 
         if(writerDate < now){
 
-            let batch = db.batch()
 
             // target collection
-            let targetId = "";
-            db.collection(targetCollection)
-            .get()
-            .then(targets => {
-                targets.docs.map(target => {
-                    targetId = target.data().writersId
-                    batch.update(target.ref, {
-                        name: "",
-                        priority: 0,
-                        writersId: ""
-                    })
-                })
-            })
+            let targetId = await new Promise((resolve, reject) => { UpdateTarget(resolve, reject, targetCollection) })
 
             // writers collection
-            const nextDate = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1)
+            let batch = db.batch()
+            const nextDate = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 0, 0, 0)
             snapshot.docs.map(doc => {
                 if(doc.id !== 'info'){
                     batch.delete(doc.ref)
@@ -49,11 +38,13 @@ export default function CheckWriters(resolve, reject, getCollection, updateColle
                     batch.update(doc.ref, { date: nextDate })
                 }
             })
+            batch.commit()
+
+            data = []
 
             // posts collection
-            UpdateBatch(updateCollection, targetId, batch)
+            UpdateBatch(updateCollection, targetId)
 
-            batch.commit()
         }
 
         data = data.filter((doc) => doc.id !== 'info')
